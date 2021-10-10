@@ -1,0 +1,207 @@
+Timeline documentation
+project: Alien Invasion 
+Author: Antonio Jimenez
+/**
+* here is the progress and the timeline for the alien invasion project. the purpose of 
+* the timeline file is to provide progress on the project so that the author can keep     * track. For those viewing and perhaps editing the code, the documentation is a record of * the things the author has done. 
+*/
+6/29/2021:
+- the settings in the alien invasion game has  been establised and have been integrated     in the run_game()
+
+7/1/2021:
+- made the ship file and integrated it into the main function. 
+- refactored the file so that the game has a game functions file.
+
+7/4/2021:
+- started to add movement to the ship by adding a key event where when the right key is     pressed the ship will move + 1.
+- also passed a parameter "ship" in the check events function. 
+- The code for the ship to move left and right has been added. 
+- A flag for the ship movement has been added so that the ship can move smoothly.
+- updated the ship file so that the speed is integrated into the movement. the ship     movement goes by the value in the settings. 
+- limited the ship range so that the ship doesnt fly off the screen.
+- refactor check_events().
+
+7/6/2021:
+- started making the  bullets class. which uses the sprites function which allows us
+  to controll multiple "like" objects.
+- have to review classes in python.
+
+7/10/2021:
+- super() = Function used to give access to the methods of a parent class. returns a                  temporary object of a parent class.
+- the init() function has been defined where the a rect object is made for the bullet,      with its height width, and position. we then move the rect at the same position as the    ship. the bullets y position is then stored as a float. the color of the ship from        ai_settings is stored in "self.color". speed of the bullet is stored in        self.speed_factor.
+- the update() function is made so that the bullet can be able to move up the y-axis       (which is decreasing) the new value is palce in self.rect.y
+- the draw_bullet(self) function draws the bullet on the screen with its attributes. 
+
+7/11/2021:
+- in the main file, the the group is imported from pygame.sprite, a group is then created   and stored in bullets. 
+- in the while loop, the update() function is called which updates each sprite in the       group.
+
+7/13/2021:
+- debug the code so that the ship can be able to move and fire bullets. 
+- updated the code so that the game functions can update the screen and fire bullets. 
+- in the main file a group of bullets is made to store, then in the loop check events     passes the bullets object. if the spacebar is pressed a new bullet object is created      and is added to the group and when the update screen is executed and the bullets in the   group is then executed and while loopp happens the update has the bullets move up. 
+- we then delete the olb bullets if it went off the screen. we make a for loop in the     main loop where a copy of the bullets stored is placed and for each bullet that is less   than 0 delete the bullet. 
+- refactored so that there is a update bullets function and a fire bullets function in     the game functions. 
+
+7/15/2021:
+- added a new button so that the quit button is "q".
+- the alien class is made as an inheritance from the sprite class. The screen, settings,   position are placed in self. 
+- blit me is then dified so that the alien can be drawn. 
+- class is then integraded in the main file. the alien class is imported and the alien object is created. the alien object is placed in the update screen function. 
+
+7/19/2021:
+- the alien fleet is going to be created. The first thing to do is to see how many aliens  fit in a row. the equation used to find the amount of space on the screen is the size of  the screen minus double  the alien width.
+
+	available_space_x = ai_settings.screen_width - (2 * alien_width)
+
+- to create the amount of aliens we take the available space and divide by double the alien width. the reason being is that for an alien to show up (going left to right) there is an empty space then an alien. 
+	
+	number_aliens_x = avaliable_space_x / (2 * alien_width)
+
+-  replaced the alien object to a group.
+
+
+[7/21/2021]:
+- to create the fleet, a create_fleet() function was made that passes "ai_settings, screen, and aliens" . the function creates an alien then takes the width of the alien. the alien width is then used with the calculation specified to find the total available space. the number of aliens is found by using the equation then converting the entire thing to a integer. 
+- to create the rows of aliens a for loop is implimented with a range() of the number of aliens in a row. in the for loop an alien object is created and then the alien is placed using a calculation then the alien is added to the group. 
+
+[7/23/2021]:
+- reafatored the create fleet so that two functions are created.
+- adding rows by doing the calculations specified in pages 273 and 274. the entire height   of the screen subtracted by 3 * the alien height then subtract the ship height. the   number of rows is then found by taking the height and dividing it by the height of 2    aliens. 
+- next we start to move the aliens to the right by creating a settings value in the   settings file and then create a new function in aliens where we update the position of   the alien ships. 
+- in the game functions, the update_aliens function is defined with the alien class   passed. In the game functions, the aliens update function only executes the update   function in aliens.
+
+[7/27/2021]:
+- in the settings the fleet direction is created by saying that the moving to the right   is a positive 1 and -1 represents moving to the left (much like a boolean but its by    adding and subtracting).
+- another function is made in aliens called "check edges" the screen parameters are taken and placed in a variable. the alien rectangle right and left side values are checked if they pass the boundaries of the screen. if the sides surpass the boundaries the function returns true. 
+- the update function in the aliens is changed so that the speed factor is multiplied by the direction so either self.x is a positive or negative value. 
+
+[8/8/2021]
+- we continue to create code to make the alien fleet move by creating a "check fleet edges" the function works by taking each alien in aliens.sprites() and if the alien has hit the edge then run the change_fleet_direction() function. 
+- change_fleet_direction is a function that drops each alien if they were to hit the edge. the alien.rect.y which handles the vertical movement of the alien fleet is added by the drop speed. 
+- the direction of the fleet is then changed to a -1. 
+- the update aliens function is then changed so that the check fleet edges is activated by passing ai_settings and aliens. 
+- in the alien invasion file the update aliens function passes ai_settings and aliens. 
+- to make collisions happen the sprite function called sprite.groupcollide() is used.
+- the .groupcollide() function compares each bullet and each alien and checks if it has collided the function the returns a dictionary that pairs the bullet and the alien as a dictionary. 
+- debug code.
+
+[8/11/2021]
+- according to the book in the .groupcollide() function deletes one or both of the objects when passed True for both the bullets and aliens. 
+- in Repopulating the feet, we want to be able to repopulate the fleet when there is a depletion of aliens. if there is a group depletion of aliens then we call create fleet. 
+- in update bullets, if there is no aliens left then then we use .empty() to get rid of the remaining bullets and execute create_fleet(). 
+- we then update the function by passing more variables. 
+- increase the speed of the bullets to 3. 
+- refactor update_bullets()
+- now we want to   the game. to end the game well check for any collisions.
+- the function spritecollideany takes two arguments: a sprite and a group, the methods takes any member of group thats collided with the sprite and stops looping thorugh the group as soon as it finds one member that has collided. 
+
+[8/12/2021]
+- testing out the newest function in the code when running the game when the alien hit the hip the terminal prints out ship hit. 
+- next we want to figure out what happens when an alien collides with the ship. lets count how many times the ship has been hit by tracking statistics for the game. 
+- the class will be called gamestats and there will be one instance of it during the entirety of the alien invasion. 
+- in the class we want to reset some of the statistics each time the player starts. to do this ai_settings is initialized and the function reset_stats is executed. 
+- in the limit of ships is stored in a variable ships_left.
+- in the main file, game stats is imported and an object is created stored in the variable stats. 
+- update aliens also passes more variables. 
+- when the ship hits one of the aliens then the value of ship_limit is decreased. 
+
+[8/13/2021]:
+- we import the sleep function from the time module to pause the game. 
+- the ship hit function coordinates the response when the ship is hit by an alien. 
+- in ship_hit the number of ships is reduced by 1, then the code will execute empty whjich will delete the aliens and bullets. 
+- next in the function, we create fleet and center the ship (a center ship function will be added later) finally we will pause for 0.5 seconds.
+- if an alien hits the bottom then the game should respond the same way.
+- we will add a new function to preform the check when an alien reaches the bottom and call it from update alien.
+- for each alien in the sprite check if they had reached the bottom by comparing the bottom of the screen with the bottom of the alien. if the condition is met then execute ship_hit.
+- in update aliens we place the function check_aliens_bottom to see if any aliens have been updated to the bottom of the screen then execute the function. 
+
+[9/16/2021]:
+- we then add a game over function so that when we run out of ships the game will end   accordingly. in the game_stats class we create a flag called game_active that changes   whenever the game ends or starts. 
+- in ship_hit() we set game_active to false, when the number of ships left have reached   0. 
+- when the game stats are active then in alien_invasion.py the ship can be updated, the   bullets, and the aliens. 
+
+[9/18/2021]:
+- we are now going to be adding a play button. so when alien_invasion is first running,   the game doesnt immediately start, instead a start button is presented. 
+- in game_stats we set self.game_active = False.
+- since we are going to create a start button, which is an object, a class is created to   shape the button. the class is called button. 
+- we first import pygame.font module, which allows us to write stuff on the screen.
+- the intialization function takes the parameters ai_settings, the screen object, and msg which is a string for the message. 
+- pygame.font.Sysfont brings the font attribute to the text. the None argument tells that we will be using the default font. 48 determines the size. 
+- in the next line of the function we use .Rect to center the object 
+
+[9/24/2021]:
+- in the prep_msg() function the parameter is the msg from the initialization function. 
+- font.render() turns the text into an image. we then store it in msg_image.
+- font.render() takes a boolean value to confirm whether making the text smoother or sharp should be off. 
+- we create a rectangle from msg_image and center it by setting it as equal to the rect.center
+- we then add another function which allows us to draw the button. we call screen.fill() to draw the rectangular portion. we then call screen.blit to actually execute the button. 
+- next we incorporate the button function to the main alien_invasion file.
+- we import the button into the file, we then make an object from the button class called play_button.
+- we then update the gf.update_screen() with the play button. we therefore update the function in game functions by creating an if statement that "if the game is not active, then draw the play button ".
+
+[9/25/2021]:
+- to start the game we update game functions, check events. 
+- in the check events we add a conditional statement, when the mouse button is pressed we   grab the position of the mouse click and send it to the check_play_button function.
+- in the check play button function, the mouse coordinates are checked if it matches with   the buttons coordinated using .collidepoint()
+- if the coordinates match then the game would begin.
+- in the alien invasion file we add the conditions in the gf.check_events()
+- since the code just written will work on first time playthrough, it wont work when the   game resets. 
+- to reset the game whenever the player clicks play we reset the game statistics amd   clear some stuff. 
+- in the check_play_button() more parameters are added. the reset_stats() function is executed and the aliens and bullets are cleared, we then create a new fleet and center the ship. 
+
+[insert date here]:
+- next we want to deactivate the play button, even when the button is clicked on the window, the play button will still be active even when the button is not even there. 
+
+- to fix this, we create button_click which holds a flag of whether the click happened at the play rectangle. we then put in the conditional statement of check_play_button of if the button clicked ans the game is not active then execute the following in button clicked. 
+
+- next is to hide the mouse cursor, in the check_play_button() function the we set pygame.mouse.set_visible(Flase) to tell the program that the mouse is not visible when its over it. we can also make the cursor reappear when we want to click play by placing it true in the ship_hit() function. 
+
+[9/26/2021]:
+- in the intended game functions we want to level up everytime we destroy an entire   fleet. 
+- whenever a ship destroys an entire fleet the next level will present the fleet in a   much faster pace. 
+- we first reoraganize the speed settings so that there is a group that is static and a     group that is dynamic. we place all the changing values in a function called   initalize_dynamic_settings(). 
+
+- we also add another setting called speedup_scale to controll how quickly the game   speeds up. a speed like 1.1
+- we then create a function called increase speed so that each speed of different objects   are multiplied by the speedup_scale. 
+- in the game functions, in check_bullet_alien_collisions(), if the amount of aliens in   the fleet reaches 0 then the increase_speed() function in the settings should be   executed. 
+- to reset the speed at the start of a new game, we go to game_functions and execute   ai_settings.initialize_dynamic_settings() at the start of a new game when the user   clicks play. 
+
+
+[9/27/2021]:
+- to impliment a scoring system we will create a variable called self.score in the     game_stats.py within the function reset_stats
+- to display the score on the screen we create a scoreboard class. in the class we will     display the current score but repoert the high score, level, and number of ships        remaining. 
+- in the prep_score() function we turn the numerical value "stats.score" and turn a      numberical value to a string. we then render the image so that it will  show up. When     we render() we can also pass the text color and the background color.
+- we then position the score board by getting the rect() and positioning it by taking the   right part of the rect 20 pixels from the screen edge.
+- place the top edge 20 pixels down. 
+- we then create the function show_score() to blit() the screen.
+- we then integrate the score board into the main file by importing it and creating an   instance called sb. we then pass it to update screen. 
+- in the update screen function we execute the show_score function.
+
+[input date]:
+- in the check_bullet_alien_collisions() we create a condition where if the collision of    the bullet to the aliens is true, then the score in the stats will increase by the       points for every alien.
+- after the addition of the score the object sb willexecure prep_score()
+- we then passed the object to the update_bullet()
+- in the current code, the we could miss some aliens. if we send two bullets with     aliens, the player will recive only one point for one alien. as a result, since the     scoring wont be accurate. we will add onto the check_bullet_alien_collisions().
+- in game_functions the condition for collisions, a for loop will be implimented so for     each alien that has collided will add the stats.score of alien poinst multiplied by the   amount of aliens that have collied in each loop.  
+- now lets increase the point value, with every level the ability to shoot down all     aliens becomes more diffuicult, therefore each hit should be worth more.
+- in increase_speed() we include alien points and will multiply by the score_self.
+- in most arcade style games the scores are multiples of 10. the round() function rounds   the value to to the nearest decimal point but when -1 is passed then the rounded value   will be 10, 100, 1000. the format command tells python to put commas every thousandth.
+
+[input date]:
+- now lets put in the high score display so that we can provide a goal.
+- in the game_stats we place the high score. since we dont want to restart the high score   we place it in init.
+- in the score board, we create the high score functon where we round the values to the   nearest 10th, we then format the number so that there is a comma in every 100th game.
+- we then render the image with the render function. we then get the rect and center the   function.
+- now lets display the level, in game_stats() the we place a level value in reset_stats()   to reset the level everytime we make a new game. 
+- in the score_board we create a function called prep_level() where we have the render     the image using font.render(). we then get the rect of the image and move it into     position using the screen as a reference. 
+- in the game functions we modify check_bullets_alien_collisions() when the amount of     aliens is 0 then stats.level += 1. sb.prep_level() is then executed.  
+- lets display the amount of ships left in the screen. we start by having ship inherit     sprite.
+
+[input date]:
+- in the scoreboard class we input prep_ship as a new function. Within the new function 
+  we create a new group of ships by using the group function.
+- we then create a for loop of ship_number at the amount of the ships_left in the stats.
+- for every ship in the stats.ships_left we create a ship using the ship class and place   then in the top right corner of the screen. 
+- in the show_score we include ship.draw() on the group and pygame draws each ship.
+- to show how many ships are in the game.functions 
