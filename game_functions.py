@@ -31,7 +31,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     Parameters
     ------------
     ai_settings: obj
-        the ai_settings class is passed to a different function depending on the event.
+        the ai_settings object contains different 
 
     ship: obj
         the ship class is passed to a different function depending on the event.
@@ -73,7 +73,14 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
     Parameters
     -------------
     stats: obj
-        stats in this function will be used to
+        stats in this function will be used to reset the game statisitcs and to check
+        the flag "game_active".
+
+    screen: obj
+        the screen object is used only to be passed onto another function.
+
+    ai_settings: obj
+        the settings object is used to
 
     """
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)

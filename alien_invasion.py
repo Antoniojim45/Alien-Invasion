@@ -1,23 +1,16 @@
 """ Alien Invasion.py
 
-This is the main file of the game. 
+This is the main file of the game. The only function in this file is run_game()
+where the program creates the screen for the game with the specified parameters in
+the settings. before the function is ran there are multiple functions that are imported.
+There are a number of objects created so that the functions within them are utilized.
+The main loop consist of different functions where the game is updated.the last command
+is the run_game() command which tells pygame to run.
 
+Project: Alien Invasion
+Name: Antonio Jimenez
+Version 1
 """
-###################
-# Project: Alien invasion
-# File Name: alien_invasion.py
-# Name: Antonio Jimenez
-# Version: 1
-#
-# Description:
-# The main file, alien_invasion.py, creates a number of important objects used throughout the game:
-# the settings are stored in ai_settings, the main display surface is stored in screen, and a ship
-# instance is created in this file as well. Also stored in alien_invasion.py is the main loop of
-# the game, which is a while loop that calls check_events(), ship.update(), and update_screen().
-# alien_invasion.py is the only file you need to run when you want to play Alien Invasion.
-# The other files —settings.py, game_functions.py, ship.py— contain code that is imported,
-# directly or indirectly, into this file.
-###################
 import pygame
 import game_functions as gf
 from settings import Settings
@@ -31,17 +24,27 @@ from scoreboard import Scoreboard
 
 
 def run_game():
+    """
+    The main function of alien invasion. pygame is initialized and the screen is
+    created. There are multiple objects created which play specific roles in the game.
+    The main loop updates the game for any changes made while playing.
+
+    Parameters
+    ------------
+    none
+    """
     # Initailize game and create a screen object.
     pygame.init()
-    ai_settings = Settings()
+    ai_settings = Settings() # Creates the settings object
+
     # create a window with the tuple param
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
 
-    # Make a Play Button.
+    # Make a Play Button by creating the play object.
     play_button = Button(ai_settings, screen, "Play")
 
-    # make a ship object
+    # make a ship object.
     ship = Ship(screen, ai_settings)
 
     # Make a group to store bullets in.
@@ -50,7 +53,7 @@ def run_game():
     # Set the background colors (R, G, B).
     bg_colors = (230, 230, 230)
 
-    # Make an alien group
+    # Make an alien group.
     aliens = Group()
 
     # Create a fleet of aliens
