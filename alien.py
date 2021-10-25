@@ -1,11 +1,10 @@
-##############################
-# Project: Alien invasion
-# File Name: alien.py
-# Name: Antonio Jimenez
-# Version: 1
-#
-# Description:
-##############################
+""" alien.py
+
+This file 
+
+Name: Antonio Jimenez
+Version: 1
+"""
 import pygame
 from pygame.sprite import Sprite
 
@@ -15,7 +14,14 @@ class Alien(Sprite):
     """
 
     def __init__(self, ai_settings, screen):
-        """Initialize the alien and set its starting position."""
+        """Initialize the alien and set its starting position.
+        
+        param
+        -----------
+        ai_settings: 
+
+        screen: obj
+        """
         super(Alien, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
