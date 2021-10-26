@@ -19,5 +19,4 @@ Left | ◀
 Shoot | ␣
 Quit | Q
 
-C:\User\Administrator\Desktop\Supreme-Link-Grabber>alien_invasion.py
 
