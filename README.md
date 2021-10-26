@@ -19,4 +19,3 @@ Left | ◀
 Shoot | ␣
 Quit | Q
 
-
