@@ -1,12 +1,4 @@
-##############################
-# Project: Alien invasion
-# File Name: bullet.py
-# Name: Antonio Jimenez
-# Version: 1
-#
-# Description:
-#
-##############################
+
 
 import pygame
 from pygame.sprite import Sprite

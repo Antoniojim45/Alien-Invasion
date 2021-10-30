@@ -1,11 +1,11 @@
 """ Alien Invasion.py
 
 This is the main file of the game. The only function in this file is run_game()
-where the program creates the screen for the game with the specified parameters in
-the settings. before the function is ran there are multiple functions that are imported.
-There are a number of objects created so that the functions within them are utilized.
-The main loop consist of different functions where the game is updated.the last command
-is the run_game() command which tells pygame to run.
+where the program creates the screen for the game with the specified parameters 
+in the settings. before the function is ran there are multiple functions that 
+are imported.There are a number of objects created so that the functions within 
+them are utilized.The main loop consist of different functions where the game is 
+updated.the last command is the run_game() command which tells pygame to run.
 
 Project: Alien Invasion
 Name: Antonio Jimenez

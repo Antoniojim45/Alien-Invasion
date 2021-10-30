@@ -31,20 +31,31 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     Parameters
     ------------
     ai_settings: obj
-        the ai_settings object contains different 
+        ai_settings holds all the values used to define the games parameters.
 
     ship: obj
-        the ship class is passed to a different function depending on the event.
+        ship is the main object in controll and features moving left, right, and 
+        shooting. 
 
     screen: obj
-        the object created by pygame which specifies the space made and to be passed
-        to another function.
+        screen is an object that holds all the properties of the game screen.
+    
+    stats: obj
+        stats is an object that holds the games status of whether something is active or not.
+    
+    sb: obj
+        the scoreboard object records and adds all the scores made when shooting
+        down aliens.
+
+    play_button: obj
+        a button to start the game. 
 
     aliens: obj
-        the aliens class is passed to a different function depending on the event.
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
 
     bullets: obj
-        the bullets class is passed to a different funtion depending on the event.
+        bullets is a group of objects that is used to shoot aliens with.
 
     """
     # for every event in "pygame.event.get()" listen for any of the following
@@ -60,7 +71,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
             check_keyup_events(event, ship)
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
+            mouse_x, mouse_y = pygame.mouse.get_pos() # Grabs the position of the x and y coordinate
             check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y)
 
 def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y):
@@ -73,14 +84,37 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
     Parameters
     -------------
     stats: obj
-        stats in this function will be used to reset the game statisitcs and to check
-        the flag "game_active".
+        stats is an object that holds the games status of whether something is active or not.
 
     screen: obj
-        the screen object is used only to be passed onto another function.
+        screen is an object that holds all the properties of the game screen.
 
     ai_settings: obj
-        the settings object is used to
+        ai_settings holds all the values that are within the game.
+    
+    sb: obj
+        the scoreboard object records and adds all the scores made when shooting
+        down aliens.
+
+    play_button: obj
+        a button to start the game. 
+
+    ship: obj
+        ship is the main object in controll and features moving left, right, and 
+        shooting. 
+
+    aliens: obj
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
+
+    bullets: obj 
+        bullets is a group of objects that is used to shoot aliens with.
+
+    mouse_x: float
+        position of the mouse in the x coordinate
+
+    mouse_y: float
+        position of the mouse in the y coordinate
 
     """
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
@@ -119,22 +153,21 @@ def check_keydown_events (event, ai_settings, screen, ship, bullets):
     Parameters
     -----------
         event: obj
-            the event object is from the check_events() function which takes
-            specific events (like pressing down, up, ect) and passes them.
+            the parameter passes any movement from teh user whether that be moving left, right, 
+            shooting, ect.
 
         ai_settings: obj
-            the ai_settings class is passed to a different function depending on the event.
+            ai_settings holds all the values used to define the games parameters.
 
         screen: obj
-            the object created by pygame which specifies the space made and to be passed
-            to another function.
+            screen is an object that holds all the properties of the game screen.
 
         ship: obj
-            the ship object is utilized so that the movement flag of both left
-            and right are changed. otherwise it is passed to the fire_bullet function.
+            ship is the main object in controll and features moving left, right, and 
+            shooting.
 
         bullets: obj
-            the bullets are passed onto the fire_bullets function.
+            bullets is a group of objects that is used to shoot aliens with.
 
     """
     # if the key down event is the right button then set the moving
@@ -162,12 +195,12 @@ def check_keyup_events (event, ship):
     Parameters
     ------------
         event: obj
-            the event object, in this function, is used to check if the event
-            being passed matches the button pressed.
+            the parameter passes any movement from teh user whether that be moving left, right, 
+            shooting, ect.
 
         ship: obj
-            the ship object is utilized so that the movement flag of both left
-            and right are changed.
+            ship is the main object in controll and features moving left, right, and 
+            shooting.
     """
     if event.key == pygame.K_RIGHT:
         ship.moving_right = False
@@ -178,15 +211,23 @@ def check_keyup_events (event, ship):
 def fire_bullet(ai_settings, screen, ship, bullets):
     """fire bullets if limit not reached yet
 
-    this function takes the number of bullets stored and checks if the amount of
-    bullets allowed, stored in the ai_settings, is greater than it. When True
-    a new bullet object is created called new_bullet and is added to the bullets sprites.
+    fire_bullets takes the number of allowed bullets and creates new ones.
+    the new ones are then added to the existing group.
 
     Parameters
     -----------
         ai_settings: obj
-            ai_settings is used to grab the integer "bullets_allowed" to compare
-            to the amount of bullets in the group.
+            ai_settings holds all the values used to define the games parameters.
+
+        screen: obj
+            screen is an object that holds all the properties of the game screen.
+
+        ship: obj
+            ship is the main object in controll and features moving left, right, and 
+            shooting.
+
+        bullets: obj
+            bullets is a group of objects that is used to shoot aliens with.
     """
     # Create a new bullet and add it to the bullets group.
     if len(bullets) < ai_settings.bullets_allowed:
@@ -194,7 +235,33 @@ def fire_bullet(ai_settings, screen, ship, bullets):
         bullets.add(new_bullet)
 
 def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
-    """Update position of the bullets and get rid of the old bullets."""
+    """Update position of the bullets and get rid of the old bullets.
+
+    when bullets are fired they will move up the screen, and when they move off 
+    the screen the bullets are removed.
+
+    Parameters
+    -----------
+        ai_settings: obj
+            ai_settings holds all the values that are within the game.
+
+        screen: obj
+            screen is an object that holds all the properties of the game screen.
+            
+        stats: obj
+            stats is an object that holds the games status of whether something is active or not.
+
+        sb: obj
+            the scoreboard object records and adds all the scores made when shooting
+            down aliens.
+
+        aliens: obj
+            the aliens class is passed to a different function depending on the event.
+
+        bullets: obj
+            the bullets class is passed to a different funtion depending on the event.
+    
+    """
     # Update bullet position.
     bullets.update()
 
@@ -206,7 +273,39 @@ def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
     check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
 def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):
-    """Respond to bullet-alien collisions."""
+    """Respond to bullet-alien collisions.
+    
+    This function checks if the bullet and the aliens have collided. If 
+    the statement is true then the score will add. If there is no aliens left
+    then the game will reset with more difficulty. 
+
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    screen: obj
+        screen is an object that holds all the properties of the game screen.
+
+    stats: obj
+        stats is an object that holds the games status of whether something is active or not.
+
+    sb: obj
+        the scoreboard object records and adds all the scores made when shooting
+        down aliens.
+
+    ship: obj
+        ship is the main object in controll and features moving left, right, and 
+        shooting.
+
+    aliens: obj
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
+
+    bullets: obj
+        bullets is a group of objects that is used to shoot aliens with.
+    
+    """
     # Remove any bullets and aliens that have collided
     # Check for any bullets that have hit the aliens.
     # if so, get rid of the bullet and the aliens.
@@ -236,13 +335,52 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         create_fleet(ai_settings, screen, ship, aliens)
 
 def get_number_rows(ai_settings, ship_height, alien_height):
-    """Determine the number of rows of aliens that fit on the screen."""
+    """Determine the number of rows of aliens that fit on the screen.
+
+    returns the number of rows by calculating the size of the screen in reference
+    to the alien height and the ship height. 
+
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    ship_height: float
+        the length of the ship
+
+    alien_height: float
+        the length of each alien. 
+    
+    Returns
+    --------
+    number_rows: int
+        the number of rows allowed in the screen.
+
+    """
     available_space_y = (ai_settings.screen_height - (3 * alien_height) - ship_height)
     number_rows = int(available_space_y / (2 * alien_height))
     return number_rows
 
 def create_fleet(ai_settings, screen, ship, aliens):
     """Create a fleet full of aliens.
+
+    the function starts by getting the values for how many aliens are needed. 
+    then we create a matrix of aliens by making a nested loop. 
+
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    screen: obj
+        screen is an object that holds all the properties of the game screen.
+
+    ship: obj
+        ship is the main object in controll and features moving left, right, and 
+        shooting.
+
+    aliens: obj
+        the aliens class is passed to a different function depending on the event.
 
     """
     # Create an alien and find the number of aliens in a row.
@@ -258,13 +396,51 @@ def create_fleet(ai_settings, screen, ship, aliens):
             create_alien(ai_settings, screen, aliens, alien_number, row_number)
 
 def get_number_aliens_x(ai_settings, alien_width):
-    """Determine the number of aliens that fit in a row."""
+    """Determine the number of aliens that fit in a row.
+    
+    Calculates the amount of aliens in a row then returns it.
+
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    alien_width: float
+        The width of a single alien.
+
+    Returns
+    ----------
+    number_aliens_x: int
+        The number of aliens in a row.
+    """
     available_space_x = ai_settings.screen_width - 2 * alien_width
     number_aliens_x = int(available_space_x / (2 * alien_width))
     return number_aliens_x
 
 def create_alien(ai_settings, screen, aliens, alien_number, row_number):
-    """Create an alien and place it in a row"""
+    """Create an alien and place it in a row
+    
+    In this method we create the aliens according to how many are needed
+    in each row. after the alien is created they are placed on the screen 
+    and added to the alien group. 
+
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    screen: obj
+        Screen is an object that holds all the properties of the game screen.
+
+    aliens: obj
+        The aliens class is passed to a different function depending on the event.
+
+    alien_number: int 
+        The amount of aliens in each row.
+
+    row_number: int
+        The current row that aliens will add onto.
+    """
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
     alien.x = alien_width + 2 * alien_width * alien_number
@@ -273,7 +449,21 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     aliens.add(alien)
 
 def check_fleet_edges(ai_settings, aliens):
-    """Respond appropriately if any aliens have reached an edge."""
+    """Respond appropriately if any aliens have reached an edge.
+
+    Check for each alien if they have reached an edge. If any of the aliens have
+    reached an edge then change the direction.
+    
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    aliens: obj
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
+
+    """
     for alien in aliens.sprites():
         if alien.check_edges():
             change_fleet_direction(ai_settings, aliens)

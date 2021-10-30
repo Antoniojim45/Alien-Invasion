@@ -1,6 +1,6 @@
 """ alien.py
 
-This file 
+This file the 
 
 Name: Antonio Jimenez
 Version: 1
