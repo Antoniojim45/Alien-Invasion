@@ -470,7 +470,20 @@ def check_fleet_edges(ai_settings, aliens):
             break
 
 def change_fleet_direction(ai_settings, aliens):
-    """Drop the entire fleet and change the fleet's direction."""
+    """Drop the entire fleet and change the fleet's direction.
+
+    When the aliens have reached the edge of the screen each alien
+    will drop down in each direction.
+    
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    aliens: obj
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
+    """
     for alien in aliens.sprites():
         alien.rect.y += ai_settings.fleet_drop_speed
     ai_settings.fleet_direction *= -1
@@ -485,7 +498,39 @@ def check_aliens_bottom(ai_settings, stats, screen, sb, ship, aliens, bullets):
             break
 
 def update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets):
-    """Check if the fleet is at an edge, and then update the positions of all the aliens in the fleet"""
+    """Check if the fleet is at an edge, and then update the positions of all 
+       the aliens in the fleet.
+    
+    The aliens are updated according to the actions being taken. whenever a alien 
+    hits an edge or if an alien has collided with any object.
+    
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    stats: obj
+        stats is an object that holds the games status of whether something is active or not.
+
+    screen: obj
+        screen is an object that holds all the properties of the game screen.
+
+    sb: obj
+        the scoreboard object records and adds all the scores made when shooting
+        down aliens.
+
+    ship: obj
+        ship is the main object in controll and features moving left, right, and 
+        shooting.
+
+    aliens: obj
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
+
+    bullets: obj
+        bullets is a group of objects that is used to shoot aliens with.
+
+    """
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
 
@@ -498,7 +543,38 @@ def update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets):
     check_aliens_bottom(ai_settings, stats, screen, sb, ship, aliens, bullets)
 
 def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
-    """Respond to the ship being hit by alien."""
+    """Respond to the ship being hit by alien.
+
+    If the ship is hit by an alien but there are still ships left then 
+    restart the game. 
+    
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    stats: obj
+        stats is an object that holds the games status of whether something is active or not.
+
+    screen: obj
+        screen is an object that holds all the properties of the game screen.
+        
+    sb: obj
+        the scoreboard object records and adds all the scores made when shooting
+        down aliens.
+
+    ship: obj
+        ship is the main object in controll and features moving left, right, and 
+        shooting.
+
+    aliens: obj
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
+
+    bullets: obj
+        bullets is a group of objects that is used to shoot aliens with.
+
+    """
     if stats.ships_left > 0:
         # Decrement ships_left.
         stats.ships_left -= 1
@@ -522,13 +598,56 @@ def ship_hit(ai_settings, stats, screen, sb, ship, aliens, bullets):
         pygame.mouse.set_visible(True)
 
 def check_high_score(stats, sb):
-    """Check to see if there's a new high score."""
+    """Check to see if there's a new high score.
+
+    The high score is changed if the current score exceeds the it.  
+
+    Parameters
+    -----------
+    stats: obj
+        stats is an object that holds the games status of whether something is active or not.
+
+    sb: obj
+        the scoreboard object records and adds all the scores made when shooting
+        down aliens.
+    
+    """
     if stats.score > stats.high_score:
         stats.high_score = stats.score
         sb.prep_high_score()
 
 def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
-    """Update image on the screen and flip to the new screen."""
+    """Update image on the screen and flip to the new screen.
+    
+    Parameters
+    -------------
+    ai_settings: obj
+        ai_settings holds all the values that are within the game.
+
+    screen: obj
+        screen is an object that holds all the properties of the game screen.
+
+    stats: obj
+        stats is an object that holds the games status of whether something is active or not.
+    
+    sb: obj
+        the scoreboard object records and adds all the scores made when shooting
+        down aliens.
+
+    ship: obj
+        ship is the main object in controll and features moving left, right, and 
+        shooting. 
+
+    aliens: obj
+        aliens is a moving object that causes the program to end if it hits the
+        player or the bottom of the screen.
+
+    bullets: obj 
+        bullets is a group of objects that is used to shoot aliens with.
+    
+    play_button: obj
+        a button to start the game. 
+    """
     # Redraw the screen during each pass through the loop
     # fill the screen with the fill function.
     screen.fill(ai_settings.bg_color)

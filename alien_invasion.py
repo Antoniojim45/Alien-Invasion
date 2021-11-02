@@ -31,7 +31,7 @@ def run_game():
 
     Parameters
     ------------
-    none
+    None
     """
     # Initailize game and create a screen object.
     pygame.init()

@@ -5,7 +5,8 @@ Alien Invasion is a python mini-game where the player must shoot down
 as much aliens in order to reach the next high score. If the aliens reach
 you or the ground you lose. 
 
-Disclaimer: This project was created from the text "Python Crash Course" by Eric Matthes, therefore not entirely my own work. 
+Disclaimer: This project was created from the text "Python Crash Course" 
+by Eric Matthes, therefore not entirely my own work. 
 
 ## Authors
 - [@EricMatthes] (https://github.com/ehmatthes)

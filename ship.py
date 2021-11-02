@@ -1,19 +1,22 @@
-##############################
-# Project: Alien invasion
-# File Name: ship.py
-# Name: Antonio Jimenez
-# Version: 1
-#
-# Description:
-# The ship.py file contains the Ship class. Ship has an __init__() method, an
-# update() method to manage the ship’s position, and a blitme() method
-# to draw the ship to the screen. The actual image of the ship is stored in
-# ship.bmp, which is in the images folder.
-##############################
+"""ship.py
+
+The ship.py file contains the Ship class. Ship has an __init__() method, an
+update() method to manage the ship’s position, and a blitme() method
+to draw the ship to the screen. The actual image of the ship is stored in
+ship.bmp, which is in the images folder.
+
+Author: Antonio Jimenez
+Version: 1
+
+"""
 import pygame
 from pygame.sprite import Sprite
 
 class Ship(Sprite):
+    """
+    
+    
+    """
     # In the initialization section of the ship, the screen object is passed
     # and is placed in self.screen. the ship image is loaded and turned to
     # a rectangle. Get the screen rectangle and get rect. then center the
