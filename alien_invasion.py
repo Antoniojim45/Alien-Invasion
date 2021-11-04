@@ -21,8 +21,6 @@ from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
 
-
-
 def run_game():
     """
     The main function of alien invasion. pygame is initialized and the screen is

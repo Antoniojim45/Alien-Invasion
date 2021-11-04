@@ -1,13 +1,46 @@
-
-
+# Import pygame for basic functions.
+# Import sprites for group objects.
 import pygame
 from pygame.sprite import Sprite
 
 class Bullet(Sprite):
-    """A class to manage bullets fired from the ship"""
+    """A class to manage bullets fired from the ship
+
+    the bullets initilizes at the current positon the ship is in.
+    
+    Parameters
+    -----------
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
+
+    screen: obj
+        screen is an object that holds all the properties of the game screen.
+
+    ship: obj
+        ship is the main object in controll and features moving left, right, and 
+        shooting.
+    
+    Methods
+    --------
+    update():
+        move the bullets in the y direction.
+    
+    draw_bullets():
+        draw the bullets on the screen. 
+
+    """
 
     def __init__(self, ai_settings, screen, ship):
-        """Create a bullet object at the ship's current position."""
+        """
+        Parameters
+        -----------
+        ai_settings: obj
+
+        screen: obj
+
+        ship: obj
+
+        """
         # the super method calls Sprite.__init__()
         super(Bullet, self).__init__()
         self.screen = screen

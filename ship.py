@@ -1,28 +1,45 @@
-"""ship.py
-
-The ship.py file contains the Ship class. Ship has an __init__() method, an
-update() method to manage the ship’s position, and a blitme() method
-to draw the ship to the screen. The actual image of the ship is stored in
-ship.bmp, which is in the images folder.
-
-Author: Antonio Jimenez
-Version: 1
-
-"""
+# Import pygame for basic functions.
+# Import sprites for group objects.
 import pygame
 from pygame.sprite import Sprite
 
 class Ship(Sprite):
-    """
+    """ A class that represents the ship. 
+
+    The ship is the main object that the player controlls. sprite is inhereted 
+    for the score board to keep track of. starts by setting the ship at the bottom
+    center.
+
+    Parameters
+    -----------
+    screen: obj
+        screen is an object that holds all the properties of the game screen.
+
+    ai_settings: obj
+        ai_settings holds all the values used to define the games parameters.
     
+    Methods
+    --------
+    update():
+        moves the ship from left to right. 
+    
+    center_ship():
+        center the ship to the bottom center of the screen. 
+    
+    blitme():
+        draws the ship in the current location. 
     
     """
-    # In the initialization section of the ship, the screen object is passed
-    # and is placed in self.screen. the ship image is loaded and turned to
-    # a rectangle. Get the screen rectangle and get rect. then center the
-    # ship relative to the screen.
     def __init__(self, screen, ai_settings):
-        """Initialize the ship and set its starting position."""
+        """
+        Parameters:
+            screen: obj
+                screen is an object that holds all the properties of the game screen.
+        
+            ai_settings: obj
+                ai_settings holds all the values used to define the games parameters.
+
+        """
         super(Ship, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
@@ -44,7 +61,15 @@ class Ship(Sprite):
         self.moving_left = False
 
     def update(self):
-        """Update the ship's position based on the movement flag."""
+        """Update the ship's position based on the movement flag.
+
+        if the flag is true and the right part of the ship rect, is less than
+        the right edge of the screen.update the ships center value, not the rect.
+
+        Parameters:
+            None
+        
+        """
         # if the flag is true and the right part of the ship rect, is less than
         # the right edge of the screen.update the ships center value, not the rect.
         if self.moving_right and self.rect.right < self.screen_rect.right:
@@ -57,11 +82,17 @@ class Ship(Sprite):
         self.rect.centerx = self.center
 
     def center_ship(self):
-        """Center the ship on the screen."""
+        """Center the ship on the screen.
+
+        Parameters:
+            None
+        """
         self.center = self.screen_rect.centerx
 
-
-    # draw the image
     def blitme(self):
-        """Draw the ship at its current location"""
+        """Draw the ship at its current location
+        
+        Parameters:
+            None
+        """
         self.screen.blit(self.image, self.rect)

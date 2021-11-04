@@ -27,7 +27,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
     the check_events() function checks for every activity involving the keyboard,
     mouse or screen. when an event is activated then the specific check_events are
     executed.
-
+    
     Parameters
     ------------
     ai_settings: obj
