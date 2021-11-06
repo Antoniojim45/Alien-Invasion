@@ -57,12 +57,22 @@ class Bullet(Sprite):
         self.speed_factor = ai_settings.bullet_speed_factor
 
     def update(self):
-        """move the bullet up the screen"""
+        """move the bullet up the screen
+        
+        Parameters
+        -----------
+        None
+        """
         # Update the decimal position of the bullets
         self.y -= self.speed_factor
         # Update the bullet to the screen.
         self.rect.y = self.y
 
     def draw_bullet(self):
-        """Draw the bullet on the screen"""
+        """Draw the bullet on the screen
+        
+        Parameters
+        -----------
+        None
+        """
         pygame.draw.rect(self.screen, self.color, self.rect)
